@@ -1,6 +1,7 @@
 const WARN = 'warn';
 
 module.exports = {
+  root: true,
   extends: 'airbnb',
   env: {
     es6: true,
@@ -12,7 +13,10 @@ module.exports = {
     'sourceType': 'module',
   },
   rules: {
-    // Classes
+    'padded-blocks': 0,
+    'arrow-parens': [WARN, 'as-needed'],
+    'no-unused-vars': [WARN, { args: 'after-used' }],
+    'no-param-reassign': 0,
     'no-class-assign': WARN,
     'no-dupe-class-members': WARN,
     'class-methods-use-this': WARN,
