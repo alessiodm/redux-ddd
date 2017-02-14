@@ -1,9 +1,11 @@
 redux-ddd
 =========
 
-Redux extension inspired by Domain Driven Design principles.
+[Redux](https://github.com/reactjs/redux) bindings inspired by [Domain Driven Design](https://en.wikipedia.org/wiki/Domain-driven_design) principles.
 
-It could be an alternative to `redux-thunk` and `redux-saga` in certain scenarios.
+Along the lines of [`react-redux`](https://en.wikipedia.org/wiki/Domain-driven_design), `redux-ddd` provides Redux bindings for generic domain-specific components.
+
+When dealing with asynchronicity and side-effects, `redux-ddd` enables an alternative approach to popular libraries such as [`redux-thunk`](https://github.com/gaearon/redux-thunk) and [`redux-saga`](https://github.com/redux-saga/redux-saga).
 
 [![build status](https://img.shields.io/travis/alessiodm/redux-ddd/master.svg?style=flat-square)](https://travis-ci.org/alessiodm/redux-ddd)
 [![npm version](https://img.shields.io/npm/v/redux-ddd.svg?style=flat-square)](https://www.npmjs.com/package/redux-ddd)
@@ -17,79 +19,15 @@ npm install --save redux-ddd
 
 ## Basic Usage
 
-Here is an example of the basic usage of the framework.
-First of all, a simple component (i.e., a service in this case) connected to the store:
+The `redux-ddd` library provides a `@Connect` decorator that extends the semantic of self-defined custom methods `onStateUpdate` and `onAction`. The former will be called every time the observed state updates, the latter will be called when an action is dispatched to the store.
 
-```javascript
-import { Connect } from 'redux-ddd';
-...
+The `@Connect`ed components are augmented with the Redux store `dispatch` function, and with the custom mapping of the state they need.
 
-@Connect(state => ({
-  isLoggedIn: state.auth.isLoggedIn,
-}))
-class ProfileService {
+Take a look at the [quick-start](docs/quickstart.md) by example to have an immedate feeling on how the code would look like.
 
-  // The onStateUpdate is called every time the state we are
-  // observing gets updated.
-  onStateUpdate(prev) {
-    if (this.isLoggedIn && !prev.isLoggedIn) {
-      this.fetchProfile();
-    }
-  }
+## Documentation
 
-  // The onAction listener is called every time an action is
-  // dispatched in the Redux store. It can be helpful when we
-  // have logic with side-effects.
-  onAction(action) {
-    switch (action.type) {
-      case ActionType.SUBMIT_FEEDBACK_INIT:
-        this.submitFeedback(action.feedbackMsg);
-        break;
-      default:
-        return;
-    }
-  }
-
-  submitFeedback(feedbackMsg) {
-    return AjaxCalls.submitFeedback(feedbackMsg)
-            .then(() => this.dispatch(Actions.submitFeedbackSuccess()))
-            .catch(err => this.dispatch(Actions.submitFeedbackFailed(err)));
-  }
-
-  fetchProfile() { ... }
-}
-
-// The service is a singleton
-export default new ProfileService();
-```
-
-Then, in the initialization of the Redux based applications:
-
-```javascript
-import { bindStore, actionListenerMiddleware } from 'redux-ddd';
-...
-import ProfileService from './services/ProfileService';
-...
-
-const store = createStore(
-  rootReducer,
-  applyMiddleware([
-      actionListenerMiddleware,
-      ...
-  ])
-);
-
-bindStore(store, [
-  ProfileService,
-  ...
-]);
-```
-
-## Design Considerations
-
-[...]
-
-## API Documentation
-
-[...]
+- [Quick Start (by Example)](docs/quickstart.md)
+- [Design Considerations](docs/design.md)
+- [API](docs/api.md)
 
