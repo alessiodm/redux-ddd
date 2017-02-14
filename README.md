@@ -5,12 +5,14 @@ Redux extension inspired by Domain Driven Design principles.
 
 It could be an alternative to `redux-thunk` and `redux-saga` in certain scenarios.
 
+[![build status](https://img.shields.io/travis/alessiodm/redux-ddd/master.svg?style=flat-square)](https://travis-ci.org/alessiodm/redux-ddd)
+[![npm version](https://img.shields.io/npm/v/redux-ddd.svg?style=flat-square)](https://www.npmjs.com/package/redux-ddd)
+[![npm downloads](https://img.shields.io/npm/dm/redux-ddd.svg?style=flat-square)](https://www.npmjs.com/package/redux-ddd)
+
 ## Installation
 
-Just use `npm` to install `redux-ddd`:
-
-```shell
-$> npm install --save redux-ddd
+```bash
+npm install --save redux-ddd
 ```
 
 ## Basic Usage
