@@ -1,6 +1,6 @@
 {
   "name": "redux-ddd",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Redux extension inspired by Domain Driven Design principles",
   "main": "src/redux-ddd.js",
   "files": [
