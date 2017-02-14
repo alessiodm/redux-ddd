@@ -19,7 +19,7 @@ Here is an example of the basic usage of the framework.
 First of all, a simple component (i.e., a service in this case) connected to the store:
 
 ```javascript
-import { Connect } from '../redux/util';
+import { Connect } from 'redux-ddd';
 ...
 
 @Connect(state => ({
@@ -64,7 +64,7 @@ export default new ProfileService();
 Then, in the initialization of the Redux based applications:
 
 ```javascript
-import { bindStore, actionListenerMiddleware } from './redux/util';
+import { bindStore, actionListenerMiddleware } from 'redux-ddd';
 ...
 import ProfileService from './services/ProfileService';
 ...
