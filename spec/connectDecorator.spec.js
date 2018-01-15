@@ -49,7 +49,7 @@ describe('@Connect', () => {
     }).toThrowError('@Connect annotation is only valid on classes');
   });
 
-  it('binds to the store even when the store is created afterwards',  () => {
+  it('binds to the store even when the store is created afterwards', () => {
     const testInstance = new TestClass();
     spyOn(testInstance, 'onStateUpdate');
     spyOn(testInstance, 'onAction');
