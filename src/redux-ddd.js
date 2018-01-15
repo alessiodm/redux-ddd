@@ -108,11 +108,14 @@ export function bindStore(store, connectedComponents = []) {
  * obj is an object containing the new values of the target fields mapped
  * on the Redux state.
  * @param {String} componentId Component identifier for debugging purposes.
- * @returns {void}
+ * @returns {Object} The component connected to the store.
  */
 export function connectComponent(component, mapStateToProps, componentId = '<unknown>') {
   if (component == null || typeof component !== 'object') {
     throw new Error('Attempt to redux-connect an invalid component');
+  }
+  if (component[REDUX_CONNECTED_MARKER]) {
+    throw new Error('Component already redux-connected!');
   }
   if (mapStateToProps != null && !(typeof mapStateToProps === 'function')) {
     throw new Error(`Invalid mapStateToProps in ${componentId}`);
@@ -159,6 +162,7 @@ export function connectComponent(component, mapStateToProps, componentId = '<unk
   });
   // Mark the component as connected
   component[REDUX_CONNECTED_MARKER] = true;
+  return component;
 }
 
 /**
