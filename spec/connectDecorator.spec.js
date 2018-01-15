@@ -2,7 +2,6 @@ import { createStore, applyMiddleware } from 'redux';
 import {
   Connect,
   bindStore,
-  connectComponent,
   actionListenerMiddleware,
   resetStoreAndBoundComponents,
 } from '../src/redux-ddd';
@@ -14,7 +13,6 @@ describe('@Connect', () => {
   beforeEach(() => {
     resetStoreAndBoundComponents();
 
-    resetStoreAndBoundComponents();
     store = createStore(
       (state = { a: 4 }, action) => {
         switch (action.type) {
